@@ -8,6 +8,20 @@ export default class PlantList extends Component {
   //   - fetch data from the server endpoint - http://localhost:3333/plants
   //   - set the returned plants array to this.state.plants
 
+  state = {
+    plants: []
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3333/plants')
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("here is the returned json", json)
+        this.setState({ plants: json.plantsData })
+      })
+      .catch((err) => console.error("failed to fetch plants", err.plantsData))
+  }
+
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
   render() {
     return (
